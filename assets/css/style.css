@@ -1,7 +1,27 @@
-h1 {
-    color: blueviolet;
+/* Container for each hand */
+.hand-container {
+  width: 220px;      /* wider box for each hand */
+  height: 250px;     /* optional vertical space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-p {
-    color: blue;
+/* Hand images */
+.hand-img {
+  width: 180px;      /* larger hand size */
+  max-width: 100%;   /* keeps it responsive on small screens */
 }
+
+/* Optional: smaller hands on mobile screens */
+@media (max-width: 576px) {
+  .hand-container {
+    width: 150px;
+    height: 180px;
+  }
+  .hand-img {
+    width: 120px;
+  }
+}
+

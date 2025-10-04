@@ -19,7 +19,54 @@ playerButtonChoice.forEach(function(choiceButton) {
                 clearInterval(intervalID);
                 // This is where you would trigger the hand-shaking animation
                 // and reveal the final hands
+                handShakingAnimation(userChoice)
             }
-        }, 1000); // 1000ms = 1 second
+        }, 500); // keep 0.5s per countdown step
     });
 });
+
+function handShakingAnimation(userChoice) {
+    let images = ["rock", "paper", "scissors"];
+    let playerHandElement = document.getElementById("player-hand");
+    let computerHandElement = document.getElementById("computer-hand");
+
+    
+    let count = 0;
+    let intervalID = setInterval(function() {
+        let playerImage = images[Math.floor(Math.random() * images.length)];
+        let computerImage = images[Math.floor(Math.random() * images.length)];
+       
+        playerHandElement.src = "assets/images/hand-" + playerImage + ".webp";
+        computerHandElement.src = "assets/images/hand-" + computerImage + ".webp";
+        count++;
+
+        if (count >= 6) { // reduced from 10 → 6 for quicker 3-2-1 effect
+            clearInterval(intervalID);
+
+            playerHandElement.src = "assets/images/hand-" + userChoice + ".webp";
+            let computerChoice = images[Math.floor(Math.random() * images.length)];
+            computerHandElement.src = "assets/images/hand-" + computerChoice +".webp";
+            
+            determineWinner(userChoice, computerChoice)
+        }
+        
+    }, 250); // faster shake interval: 0.25s per shake
+}
+
+function determineWinner(userChoice, computerChoice) {
+    let result;
+    
+    if (userChoice === computerChoice) {
+        result = "It's a draw.";
+    } else if (
+        (userChoice === "rock" && computerChoice === "scissors") ||
+        (userChoice === "paper" && computerChoice === "rock") ||
+        (userChoice === "scissors" && computerChoice === "paper")
+    ) {
+        result = "You win!";
+    } else {
+        result = "You lose!";
+    }
+
+    document.getElementById("result").innerHTML = result;
+}

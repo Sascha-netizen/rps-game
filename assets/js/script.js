@@ -1,3 +1,6 @@
+let playerScore = 0;
+let computerScore = 0;
+
 const playerButtonChoice = document.querySelectorAll(".choice-btn");
 
 playerButtonChoice.forEach(function(choiceButton) {
@@ -69,4 +72,15 @@ function determineWinner(userChoice, computerChoice) {
     }
 
     document.getElementById("result").innerHTML = result;
+
+
+if (result === "You win!") {
+    playerScore++;
+} else if (result === "You lose!") {
+    computerScore++;
 }
+
+document.getElementById("player-score").textContent = playerScore;
+document.getElementById("computer-score").textContent = computerScore;
+}
+

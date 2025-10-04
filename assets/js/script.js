@@ -82,5 +82,7 @@ if (result === "You win!") {
 
 document.getElementById("player-score").textContent = playerScore;
 document.getElementById("computer-score").textContent = computerScore;
+
+
 }
 

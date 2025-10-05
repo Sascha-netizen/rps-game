@@ -1,10 +1,13 @@
 let playerScore = 0;
 let computerScore = 0;
+let gameOver = false;
 
 const playerButtonChoice = document.querySelectorAll(".choice-btn");
 
 playerButtonChoice.forEach(function(choiceButton) {
     choiceButton.addEventListener("click", function(e) {
+
+        if (gameOver) return;
         const userChoice = choiceButton.dataset.move;
 
         let countdownNumber = 3;
@@ -83,6 +86,27 @@ if (result === "You win!") {
 document.getElementById("player-score").textContent = playerScore;
 document.getElementById("computer-score").textContent = computerScore;
 
-
+if (playerScore === 3) {
+    result = "The player wins the game!";
+    gameOver = true;
+} else if (computerScore === 3) {
+    result = "The computer wins the game!";
+    gameOver = true;
 }
 
+document.getElementById("result").textContent = result;
+}
+
+const resetButton = document.getElementById("reset-btn");
+
+resetButton.addEventListener("click", function() {
+    playerScore = 0;
+    computerScore = 0;
+
+    gameOver = false;
+
+    document.getElementById("player-score").textContent = playerScore;
+    document.getElementById("computer-score").textContent = computerScore;
+    document.getElementById("result").textContent = "Make your next move!"
+    
+});
